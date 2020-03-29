@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "405512747777",
+    "firebase_url": "https://socialurbanphoto.firebaseio.com",
+    "project_id": "socialurbanphoto",
+    "storage_bucket": "socialurbanphoto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405512747777:android:35b2f7211c06d91434f900",
+        "android_client_info": {
+          "package_name": "br.com.padawan.socialurbanphoto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405512747777-fghsfdss5u8ge8j0kjviuslnufh0s1iu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.padawan.socialurbanphoto",
+            "certificate_hash": "64707b613bceb15bc713447a9970b656bfdba82c"
+          }
+        },
+        {
+          "client_id": "405512747777-jssbto1tg3o6tesdbpmbmavi384j8v8r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeqbgi2KRtkjDN9CKZBePDbQjlPc983ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405512747777-jssbto1tg3o6tesdbpmbmavi384j8v8r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,2 @@
+rootProject.name='SocialUrbanPhoto'
+include ':app'
