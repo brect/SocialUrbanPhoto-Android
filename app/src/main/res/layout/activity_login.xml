@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+        app:layout_constraintBottom_toTopOf="@+id/editLoginEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editLoginEmail"
         android:layout_width="0dp"
         android:background="@drawable/background_input_text"
         android:padding="12dp"
@@ -28,14 +28,14 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:hint="Digite seu e-mail"
-        android:inputType="textWebEmailAddress|textPersonName|text"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/editLoginPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editLoginPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -48,7 +48,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/editLoginEmail" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewSingin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editLoginPassword" />
 
     <ProgressBar
         android:id="@+id/progressBar"
