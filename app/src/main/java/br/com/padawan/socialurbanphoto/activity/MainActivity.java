@@ -22,82 +22,62 @@ import br.com.padawan.socialurbanphoto.fragment.FeedFragment;
 import br.com.padawan.socialurbanphoto.fragment.PerfilFragment;
 import br.com.padawan.socialurbanphoto.fragment.PesquisaFragment;
 import br.com.padawan.socialurbanphoto.fragment.PostagemFragment;
+import br.com.padawan.socialurbanphoto.helper.ConfiguracaoFirebase;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private FirebaseAuth auth;
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Configura toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("urban photo");
+        toolbar.setTitle("Xurupita social");
         setSupportActionBar( toolbar );
 
-        configuraBottomNavigation();
+        //configuracoes de objetos
+        auth = ConfiguracaoFirebase.getAuth();
 
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+        //Configurar bottom navigation view
+        configuraBottomNavigationView();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         fragmentTransaction.replace(R.id.viewPager, new FeedFragment()).commit();
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+    private void configuraBottomNavigationView(){
+
+        BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottomNavigation);
+
+        //faz configurações iniciais do Bottom Navigation
+        bottomNavigationViewEx.enableAnimation(true);
+        bottomNavigationViewEx.enableItemShiftingMode(false);
+        bottomNavigationViewEx.enableShiftingMode(false);
+        bottomNavigationViewEx.setTextVisibility(false);
+
+        //Habilitar navegação
+        habilitarNavegacao( bottomNavigationViewEx );
+
+        //configura item selecionado inicialmente
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    private void habilitarNavegacao(BottomNavigationViewEx viewEx){
 
-        switch ( item.getItemId() ){
-            case R.id.menu_sair :
-                deslogarUsuario();
-                configuraLogoutActivity();
-                finish();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void deslogarUsuario() {
-        try {
-            auth.signOut();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    private void configuraLogoutActivity() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    private void configuraBottomNavigation(){
-        BottomNavigationViewEx bottomNavigation = findViewById(R.id.bottomNavigation);
-        bottomNavigation.setTextVisibility(true);
-        bottomNavigation.enableItemShiftingMode(true);
-
-        habilitaNavegacao(bottomNavigation);
-    }
-
-    private void habilitaNavegacao(BottomNavigationViewEx navigation){
-
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        viewEx.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
                 switch (item.getItemId()){
                     case R.id.ic_home :
                         fragmentTransaction.replace(R.id.viewPager, new FeedFragment()).commit();
@@ -115,6 +95,35 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_sair :
+                deslogarUsuario();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void deslogarUsuario(){
+        try{
+            auth.signOut();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
